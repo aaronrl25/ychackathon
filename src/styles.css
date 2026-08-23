@@ -1535,6 +1535,53 @@ footer > span {
     font-size: 13px;
   }
 }
+
+/* Landing Phoenix personalities */
+.landing-personalities {
+  max-width: 1880px;
+  margin: auto;
+  padding: 125px 76px 135px;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 20%, #5d1d0b4a, transparent 32%), #0d0908;
+  border-bottom: 1px solid #27150f;
+}
+.landing-personalities > .section-kicker { justify-content: flex-start; }
+.landing-personalities > header { display: flex; align-items: flex-end; justify-content: space-between; gap: 35px; margin: 23px 0 55px; }
+.landing-personalities > header h2 { margin: 0; font: 650 clamp(44px, 4.3vw, 70px)/1.08 Manrope; letter-spacing: -.05em; }
+.landing-personalities > header h2 em { color: var(--primary); font-style: normal; }
+.landing-personalities > header p { max-width: 480px; margin: 0; color: var(--text-secondary); font-size: 16px; line-height: 1.7; }
+.landing-role-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; }
+.landing-role-grid article { min-width: 0; position: relative; overflow: hidden; min-height: 390px; padding: 0 20px 24px; border: 1px solid #43251a; border-radius: 18px; background: linear-gradient(155deg, #1a110e, #100b09); transition: transform .25s, border-color .25s, box-shadow .25s; }
+.landing-role-grid article:hover { transform: translateY(-7px); border-color: var(--role-color); box-shadow: 0 22px 55px #0009, 0 0 35px color-mix(in srgb, var(--role-color) 14%, transparent); }
+.role-index { position: absolute; z-index: 2; right: 14px; top: 14px; color: #72584d; font: 600 9px 'JetBrains Mono'; }
+.landing-role-art { height: 225px; margin: 0 -20px 17px; position: relative; display: grid; place-items: end center; background: radial-gradient(circle at 50% 70%, color-mix(in srgb, var(--role-color) 22%, transparent), transparent 58%); }
+.landing-role-art i { position: absolute; bottom: 25px; width: 125px; height: 125px; border-radius: 50%; background: var(--role-color); opacity: .17; filter: blur(45px); }
+.landing-role-art img { position: relative; height: 215px; max-width: 100%; object-fit: contain; filter: drop-shadow(0 15px 17px #000b); transition: transform .3s; }
+.landing-role-grid article:hover img { transform: translateY(-5px) scale(1.03); }
+.landing-role-grid article > small { color: var(--role-color); font: 600 7px 'JetBrains Mono'; letter-spacing: .12em; }
+.landing-role-grid h3 { margin: 9px 0 8px; font: 650 18px Manrope; }
+.landing-role-grid p { margin: 0; color: #9e8b81; font-size: 11px; line-height: 1.55; }
+.landing-role-actions { display: flex; align-items: center; justify-content: center; gap: 11px; margin-top: 35px; }
+.landing-roles-cta { height: 48px; padding: 0 20px; border: 0; border-radius: 10px; display: flex; align-items: center; gap: 8px; color: white; background: linear-gradient(135deg, #ff7135, #cf3513); font-weight: 700; font-size: 11px; box-shadow: 0 14px 35px #b92b123d; }
+.landing-role-login { height: 48px; padding: 0 22px; border: 1px solid #583025; border-radius: 10px; color: #e5d6ce; background: #17100e; font-size: 11px; font-weight: 700; }
+.landing-role-login:hover { color: white; border-color: #ff692e; background: #211512; }
+.landing-roles-cta svg { width: 15px; }
+@media (max-width: 1100px) { .landing-role-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 700px) {
+  .landing-personalities { padding: 80px 18px; }
+  .landing-personalities > header { display: block; margin-bottom: 35px; }
+  .landing-personalities > header h2 { font-size: 40px; }
+  .landing-personalities > header p { margin-top: 20px; font-size: 14px; }
+  .landing-role-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .landing-role-grid article { min-height: 310px; padding: 0 15px 18px; }
+  .landing-role-art { height: 175px; margin: 0 -15px 14px; }
+  .landing-role-art img { height: 170px; }
+  .landing-role-grid h3 { font-size: 15px; }
+  .landing-role-grid p { font-size: 9px; }
+  .landing-role-actions { align-items: stretch; flex-direction: column-reverse; }
+  .landing-role-actions button { width: 100%; justify-content: center; }
+}
+@media (max-width: 420px) { .landing-role-grid { grid-template-columns: 1fr; } .landing-role-grid article { min-height: 300px; } .landing-role-art { height: 185px; } }
 @media (max-width: 390px) {
   .hero {
     padding-left: 14px;
@@ -2146,6 +2193,19 @@ footer > span {
   top: 50%;
   transform: translateY(-50%);
 }
+.auth-phoenix-scene { position: absolute; z-index: 1; inset: 55px 15px 20px; pointer-events: none; }
+.auth-phoenix-scene:after { content: ""; position: absolute; left: 50%; top: 34%; width: 300px; height: 300px; transform: translate(-50%, -50%); border-radius: 50%; background: #ff501f33; filter: blur(65px); }
+.auth-orbit { position: absolute; left: 50%; top: 34%; border: 1px solid #a53b2055; border-radius: 50%; transform: translate(-50%, -50%); }
+.auth-orbit.orbit-a { width: 330px; height: 330px; }
+.auth-orbit.orbit-b { width: 480px; height: 480px; opacity: .55; }
+.auth-phoenix-main { position: absolute; z-index: 2; left: 50%; top: 34%; width: min(72%, 350px); height: 350px; object-fit: contain; transform: translate(-50%, -50%); filter: drop-shadow(0 25px 24px #000c); }
+.auth-pose { position: absolute; z-index: 3; width: 82px; height: 82px; object-fit: contain; padding: 5px; border: 1px solid #71331f; border-radius: 15px; background: #180e0bd9; box-shadow: 0 12px 30px #0008; animation: auth-pose-float 5s ease-in-out infinite; }
+.auth-pose-1 { left: 3%; top: 15%; }.auth-pose-2 { right: 2%; top: 21%; animation-delay: -.8s; }.auth-pose-3 { left: 6%; top: 48%; animation-delay: -1.6s; }.auth-pose-4 { right: 5%; top: 51%; animation-delay: -2.4s; }.auth-pose-5 { right: 30%; top: 1%; width: 68px; height: 68px; animation-delay: -3.2s; }
+.auth-story .auth-story-inner { left: 42px; right: 42px; top: auto; bottom: 42px; transform: none; padding: 22px; border: 1px solid #5b2b1d; border-radius: 15px; background: #140c09d9; backdrop-filter: blur(10px); }
+.auth-story .auth-logo { display: none; }
+.auth-story .auth-quote { font-size: clamp(25px, 2.7vw, 39px); margin: 0 0 20px; }
+.auth-story .auth-person > span { background: linear-gradient(145deg, #ff7438, #c53213); }
+@keyframes auth-pose-float { 50% { transform: translateY(-7px); } }
 .auth-logo {
   width: 56px;
   height: 56px;

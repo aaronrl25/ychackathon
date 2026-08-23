@@ -18,6 +18,11 @@ import {
 } from "lucide-react";
 import "./styles.css";
 import phoenix from "../assets/phoenix.png";
+import frontendPhoenix from "../assets/01_neutral-removebg-preview.png";
+import backendPhoenix from "../assets/03_focused-removebg-preview.png";
+import mobilePhoenix from "../assets/06_thinking-removebg-preview.png";
+import fullStackPhoenix from "../assets/07_explaining-removebg-preview.png";
+import devOpsPhoenix from "../assets/08_learning-removebg-preview.png";
 import { AuthPage } from "./AuthPage";
 import { WorkspaceApp } from "./WorkspaceApp";
 import { auth } from "./firebase";
@@ -53,6 +58,14 @@ const steps = [
     "Review, lock, edit, or delete any remembered preference.",
   ],
 ];
+
+const phoenixRoles = [
+  { name: "Frontend Developer", tag: "UI & EXPERIENCE", image: frontendPhoenix, color: "#ff6437", description: "React, styling, accessibility, and polished interactions." },
+  { name: "Backend Developer", tag: "SYSTEMS & DATA", image: backendPhoenix, color: "#a879ff", description: "APIs, databases, authentication, and secure server logic." },
+  { name: "Mobile Developer", tag: "IOS & ANDROID", image: mobilePhoenix, color: "#5f9cff", description: "React Native and touch-first experiences across devices." },
+  { name: "Full-Stack Developer", tag: "END TO END", image: fullStackPhoenix, color: "#ffad32", description: "Complete product features from interface to database." },
+  { name: "DevOps Engineer", tag: "SHIP & SCALE", image: devOpsPhoenix, color: "#54d4a0", description: "Cloud, deployment, CI/CD, monitoring, and reliability." },
+] as const;
 
 function LandingPage({ onAuth }: { onAuth: (mode: "login" | "signup") => void }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -193,6 +206,24 @@ function LandingPage({ onAuth }: { onAuth: (mode: "login" | "signup") => void })
             <p className="dim">Not the other way around.</p>
           </div>
           <img className="statement-phoenix right" src={phoenix} alt="" />
+        </section>
+        <section className="landing-personalities" id="personalities">
+          <div className="section-kicker"><Sparkles size={13}/> MEET YOUR PHOENIX</div>
+          <header>
+            <h2>One Phoenix.<br/><em>Built for your craft.</em></h2>
+            <p>Choose a specialist that understands your stack, priorities, and the kind of work you do every day.</p>
+          </header>
+          <div className="landing-role-grid">
+            {phoenixRoles.map((role, index) => <article key={role.name} style={{"--role-color":role.color} as React.CSSProperties}>
+              <span className="role-index">0{index + 1}</span>
+              <div className="landing-role-art"><i/><img src={role.image} alt={`${role.name} Phoenix`}/></div>
+              <small>{role.tag}</small><h3>{role.name}</h3><p>{role.description}</p>
+            </article>)}
+          </div>
+          <div className="landing-role-actions">
+            <button className="landing-role-login" onClick={() => onAuth("login")}>Log in</button>
+            <button className="landing-roles-cta" onClick={() => onAuth("signup")}>Choose your Phoenix <ArrowRight/></button>
+          </div>
         </section>
         <section className="section" id="features">
           <div className="section-kicker">WHY TEMPER</div>

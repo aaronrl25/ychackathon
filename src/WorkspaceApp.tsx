@@ -315,6 +315,8 @@ function Workspace({ user }: { user: User }) {
   const [repo, setRepo] = useState(localStorage.getItem("phoenix:repo") || "");
   const [repoInput, setRepoInput] = useState("");
   const [input, setInput] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       role: "ai",
@@ -332,29 +334,35 @@ function Workspace({ user }: { user: User }) {
       localStorage.setItem("phoenix:repo", value);
     }
   };
-  const send = (e: FormEvent) => {
+  const send = async (e: FormEvent) => {
     e.preventDefault();
     const q = input.trim();
-    if (!q) return;
-    const prefs = Object.values(
+    if (!q || loading) return;
+    const preferenceValues = Object.values(
       JSON.parse(localStorage.getItem("phoenix:preferences") || "{}") as Record<
         string,
         string[]
       >,
-    )
-      .flat()
-      .slice(0, 3)
-      .join(", ");
-    setMessages((m) => [
-      ...m,
-      { role: "user", text: q },
-      {
-        role: "ai",
-        text: `I’ll handle this as your ${role.name} Phoenix${prefs ? ` using ${prefs}` : ""}. Here’s a focused starting point:`,
-        code: `// ${role.name} Phoenix · ${repo || "local project"}\nexport function solution() {\n  // ${q.slice(0, 55)}\n  return { ready: true };\n}`,
-      },
-    ]);
+    ).flat();
+    const nextMessages: ChatMessage[] = [...messages, { role: "user", text: q }];
+    setMessages(nextMessages);
     setInput("");
+    setError("");
+    setLoading(true);
+    try {
+      const response = await fetch("http://localhost:8787/api/phoenix-chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: nextMessages, role: role.id, repository: repo, preferences: preferenceValues }),
+      });
+      const data = await response.json() as { message?: string; error?: string };
+      if (!response.ok) throw new Error(data.error || "Phoenix could not answer.");
+      setMessages((m) => [...m, { role: "ai", text: data.message || "I couldn’t produce a response." }]);
+    } catch (requestError) {
+      setError(requestError instanceof Error ? requestError.message : "Phoenix could not answer.");
+    } finally {
+      setLoading(false);
+    }
   };
   return (
     <div className="workspace-page">
@@ -422,6 +430,8 @@ function Workspace({ user }: { user: User }) {
             </div>
           </article>
         ))}
+        {loading && <article className="ai phoenix-thinking"><span className="ai-avatar"><img src={mobile}/></span><div><b>{role.name} Phoenix is thinking</b><div className="thinking-card"><img src={fullstack}/><span><i/><i/><i/></span><small>Reading your request and applying your preferences…</small></div></div></article>}
+        {error && <div className="chat-error">{error}</div>}
       </div>
       <form className="wa-composer" onSubmit={send}>
         <textarea
@@ -433,7 +443,7 @@ function Workspace({ user }: { user: User }) {
           <span>
             <Code2 /> {repo || "Connect a repository for context"}
           </span>
-          <button>
+          <button disabled={loading}>
             <Send />
           </button>
         </footer>

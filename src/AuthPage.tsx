@@ -2,6 +2,12 @@ import { useState } from "react";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { ArrowLeft, ArrowRight, Eye, EyeOff, Flame, LockKeyhole, Mail, UserRound } from "lucide-react";
 import { auth, isFirebaseConfigured } from "./firebase";
+import neutralPhoenix from "../assets/01_neutral-removebg-preview.png";
+import focusedPhoenix from "../assets/03_focused-removebg-preview.png";
+import thinkingPhoenix from "../assets/06_thinking-removebg-preview.png";
+import explainingPhoenix from "../assets/07_explaining-removebg-preview.png";
+import learningPhoenix from "../assets/08_learning-removebg-preview.png";
+import restingPhoenix from "../assets/10_resting-removebg-preview.png";
 
 type Props = {
   initialMode: "login" | "signup";
@@ -42,7 +48,7 @@ export function AuthPage({ initialMode, onBack, onRegistered }: Props) {
 
   const switchMode = () => { setMode(mode === "login" ? "signup" : "login"); setError(""); };
   return <main className="auth-layout">
-    <section className="auth-story"><button className="auth-back" onClick={onBack}><ArrowLeft size={16}/> Back to home</button><div className="auth-story-inner"><span className="brand-mark auth-logo"><Flame/></span><p className="auth-quote">“Temper remembers the little decisions, so I can stay focused on the big ones.”</p><div className="auth-person"><span>MK</span><div><b>Maya Kim</b><small>Staff engineer</small></div></div></div><div className="auth-grid"/></section>
+    <section className="auth-story"><button className="auth-back" onClick={onBack}><ArrowLeft size={16}/> Back to home</button><div className="auth-phoenix-scene" aria-hidden="true"><span className="auth-orbit orbit-a"/><span className="auth-orbit orbit-b"/><img className="auth-phoenix-main" src={neutralPhoenix} alt=""/><img className="auth-pose auth-pose-1" src={focusedPhoenix} alt=""/><img className="auth-pose auth-pose-2" src={thinkingPhoenix} alt=""/><img className="auth-pose auth-pose-3" src={explainingPhoenix} alt=""/><img className="auth-pose auth-pose-4" src={learningPhoenix} alt=""/><img className="auth-pose auth-pose-5" src={restingPhoenix} alt=""/></div><div className="auth-story-inner"><span className="brand-mark auth-logo"><Flame/></span><p className="auth-quote">Meet the Phoenix that builds like you do.</p><div className="auth-person"><span>5</span><div><b>Developer specialists</b><small>One adaptive coding partner</small></div></div></div><div className="auth-grid"/></section>
     <section className="auth-form-wrap"><div className="auth-form-card"><div className="mobile-auth-brand"><span className="brand-mark"><Flame size={18}/></span> temper<span>.</span></div><div className="auth-kicker"><LockKeyhole size={14}/> SECURE ACCESS</div><h1>{mode === "login" ? "Welcome back." : "Create your profile."}</h1><p>{mode === "login" ? "Sign in to continue to your Temper workspace." : "Start building with an AI that learns how you work."}</p>
       {!isFirebaseConfigured && <div className="config-note">Firebase configuration is required before sign-in can work.</div>}
       <form className="auth-form" onSubmit={submit}>
