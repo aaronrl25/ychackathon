@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:server": "tsx server/index.ts",
     "build": "vite build",
+    "typecheck": "tsc --noEmit",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -16,5 +18,16 @@
     "react-dom": "latest",
     "lucide-react": "latest"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@types/express": "latest",
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "@types/ws": "latest",
+    "dotenv": "latest",
+    "express": "latest",
+    "mongodb": "latest",
+    "tsx": "latest",
+    "ws": "latest"
+  }
 }
