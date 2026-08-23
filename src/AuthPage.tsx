@@ -3,7 +3,11 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfi
 import { ArrowLeft, ArrowRight, Eye, EyeOff, Flame, LockKeyhole, Mail, UserRound } from "lucide-react";
 import { auth, isFirebaseConfigured } from "./firebase";
 
-type Props = { initialMode: "login" | "signup"; onBack: () => void };
+type Props = {
+  initialMode: "login" | "signup";
+  onBack: () => void;
+  onRegistered?: () => void;
+};
 
 function friendlyError(code?: string) {
   if (code?.includes("invalid-credential")) return "That email or password doesn’t look right.";
@@ -14,7 +18,7 @@ function friendlyError(code?: string) {
   return "Something went wrong. Please try again.";
 }
 
-export function AuthPage({ initialMode, onBack }: Props) {
+export function AuthPage({ initialMode, onBack, onRegistered }: Props) {
   const [mode, setMode] = useState(initialMode);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -31,6 +35,7 @@ export function AuthPage({ initialMode, onBack }: Props) {
       if (mode === "signup") {
         const result = await createUserWithEmailAndPassword(auth, email.trim(), password);
         await updateProfile(result.user, { displayName: name.trim() });
+        onRegistered?.();
       } else await signInWithEmailAndPassword(auth, email.trim(), password);
     } catch (e) { setError(friendlyError((e as { code?: string }).code)); setLoading(false); }
   };
