@@ -1,0 +1,734 @@
+.wa-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  background: #0d0908;
+  color: #fff8f3;
+}
+.wa-shell > aside {
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 22px 14px;
+  border-right: 1px solid #352019;
+  background: #130d0b;
+}
+.wa-brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 0 7px;
+  font: 700 18px Manrope;
+}
+.wa-brand > span {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: linear-gradient(145deg, #ff7638, #c83212);
+}
+.wa-brand svg {
+  width: 18px;
+}
+.wa-brand > button {
+  display: none;
+}
+.wa-shell > aside nav {
+  display: grid;
+  gap: 5px;
+  margin-top: 45px;
+}
+.wa-shell > aside nav a {
+  height: 42px;
+  padding: 0 11px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  color: #806c62;
+  font-size: 11px;
+  text-decoration: none;
+}
+.wa-shell > aside nav a svg {
+  width: 16px;
+}
+.wa-shell > aside nav a.active {
+  color: #ffd5c3;
+  background: #30150e;
+}
+.wa-user {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: auto;
+  padding: 17px 4px 0;
+  border-top: 1px solid #352019;
+}
+.wa-user > span {
+  width: 34px;
+  height: 34px;
+  flex: none;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #4a2117;
+  color: #ffd2c1;
+  font-size: 9px;
+}
+.wa-user div {
+  min-width: 0;
+  flex: 1;
+}
+.wa-user b,
+.wa-user small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.wa-user b {
+  font-size: 9px;
+}
+.wa-user small {
+  margin-top: 3px;
+  color: #715d54;
+  font-size: 7px;
+}
+.wa-user button,
+.wa-menu {
+  border: 0;
+  background: transparent;
+  color: #806c62;
+}
+.wa-user button svg {
+  width: 15px;
+}
+.wa-shell > main {
+  min-width: 0;
+}
+.wa-menu {
+  display: none;
+}
+.wa-page {
+  max-width: 1320px;
+  margin: auto;
+  padding: 55px clamp(25px, 5vw, 70px) 45px;
+}
+.wa-page.narrow {
+  max-width: 1020px;
+}
+.wa-head {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 40px;
+}
+.wa-head > span {
+  color: #ff7438;
+  font: 700 9px "JetBrains Mono";
+  letter-spacing: 0.14em;
+}
+.wa-head h1 {
+  margin: 14px 0 10px;
+  font: 700 clamp(35px, 4vw, 53px)/1.05 Manrope;
+  letter-spacing: -0.05em;
+}
+.wa-head p {
+  margin: 0;
+  color: #a28f85;
+  font-size: 13px;
+  line-height: 1.65;
+}
+.role-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 13px;
+}
+.role-grid > button {
+  position: relative;
+  overflow: hidden;
+  min-height: 350px;
+  padding: 0 17px 20px;
+  text-align: left;
+  border: 1px solid #3c241b;
+  border-radius: 15px;
+  background: linear-gradient(155deg, #1a110e, #100b09);
+  color: white;
+  transition: 0.22s;
+}
+.role-grid > button:hover {
+  transform: translateY(-4px);
+  border-color: var(--role);
+}
+.role-grid > button.selected {
+  border-color: var(--role);
+  box-shadow:
+    0 0 0 1px var(--role),
+    0 18px 50px #0008;
+}
+.role-grid > button > div {
+  height: 215px;
+  margin: 0 -17px 14px;
+  position: relative;
+  display: grid;
+  place-items: end center;
+  background: radial-gradient(
+    circle at 50% 70%,
+    color-mix(in srgb, var(--role) 24%, transparent),
+    transparent 58%
+  );
+}
+.role-grid > button > div i {
+  position: absolute;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: var(--role);
+  filter: blur(50px);
+  opacity: 0.18;
+}
+.role-grid img {
+  position: relative;
+  height: 205px;
+  max-width: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 13px 16px #000a);
+}
+.role-grid h2 {
+  margin: 0;
+  font: 650 17px Manrope;
+}
+.role-grid p {
+  min-height: 55px;
+  color: #9e8b81;
+  font-size: 10px;
+  line-height: 1.55;
+}
+.role-check {
+  position: absolute;
+  z-index: 2;
+  right: 11px;
+  top: 11px;
+  width: 23px;
+  height: 23px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #563427;
+  border-radius: 50%;
+  background: #17100e;
+  color: transparent;
+}
+.selected .role-check {
+  background: var(--role);
+  color: white;
+  border-color: transparent;
+}
+.role-check svg {
+  width: 12px;
+}
+.wa-actions {
+  display: flex;
+  justify-content: flex-end;
+  max-width: none;
+  margin-top: 27px;
+  padding: 0;
+  border: 0;
+}
+.wa-actions > button {
+  height: 45px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #ff7135, #cf3513);
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+}
+.wa-actions svg {
+  width: 14px;
+}
+.pref-groups {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 13px;
+}
+.pref-groups section {
+  padding: 20px;
+  border: 1px solid #39231a;
+  border-radius: 12px;
+  background: #17100e;
+}
+.pref-groups section header {
+  height: auto;
+  padding: 0 0 15px;
+  display: flex;
+  align-items: center;
+  border: 0;
+  background: none;
+}
+.pref-groups h2 {
+  margin: 0;
+  font: 650 14px Manrope;
+}
+.pref-groups small {
+  margin-left: auto;
+  color: #765f55;
+  font-size: 8px;
+}
+.pref-groups section > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.pref-groups section button {
+  height: 32px;
+  padding: 0 10px;
+  border: 1px solid #40271d;
+  border-radius: 7px;
+  background: #100b09;
+  color: #89766c;
+  font-size: 9px;
+}
+.pref-groups section button.selected {
+  border-color: #d95727;
+  background: #32160e;
+  color: #ffb493;
+}
+.pref-groups section button svg {
+  width: 11px;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+.workspace-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+.workspace-page > header {
+  height: 67px;
+  flex: none;
+  display: flex;
+  align-items: center;
+  padding: 0 22px;
+  border-bottom: 1px solid #332019;
+  background: #130d0b;
+}
+.workspace-role {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.workspace-role > img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  border: 1px solid color-mix(in srgb, var(--role) 45%, #382219);
+  border-radius: 10px;
+  background: #20130f;
+}
+.workspace-role b,
+.workspace-role small {
+  display: block;
+}
+.workspace-role b {
+  font-size: 11px;
+}
+.workspace-role small {
+  margin-top: 4px;
+  color: #766158;
+  font-size: 8px;
+}
+.repo-pill {
+  margin-left: auto;
+  height: 34px;
+  padding: 0 9px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #3c281e;
+  border-radius: 7px;
+  background: #1c130f;
+  color: #b6a299;
+  font-size: 8px;
+}
+.repo-pill svg {
+  width: 13px;
+}
+.repo-pill svg:last-child {
+  margin-left: 5px;
+  color: #6d5a51;
+}
+.connect-card {
+  display: flex;
+  gap: 14px;
+  max-width: 650px;
+  margin: 25px auto 0;
+  padding: 17px;
+  border: 1px solid #4b2a1e;
+  border-radius: 11px;
+  background: #1b110e;
+}
+.connect-card > span {
+  width: 40px;
+  height: 40px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  background: #32170f;
+  color: #ff7135;
+}
+.connect-card > span svg {
+  width: 18px;
+}
+.connect-card > div {
+  flex: 1;
+}
+.connect-card h2 {
+  font-size: 13px;
+  margin: 1px 0 4px;
+}
+.connect-card p {
+  margin: 0 0 11px;
+  color: #806c62;
+  font-size: 8px;
+}
+.connect-card label {
+  height: 34px;
+  display: flex;
+}
+.connect-card input {
+  min-width: 0;
+  flex: 1;
+  padding: 0 10px;
+  border: 1px solid #41271d;
+  border-radius: 7px 0 0 7px;
+  background: #0d0908;
+  color: white;
+  font-size: 9px;
+}
+.connect-card label button {
+  border: 0;
+  border-radius: 0 7px 7px 0;
+  background: #e45121;
+  color: white;
+  padding: 0 13px;
+  font-size: 8px;
+}
+.chat-stream {
+  flex: 1;
+  overflow: auto;
+  padding: 30px max(25px, calc((100% - 760px) / 2)) 145px;
+}
+.chat-stream article {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+.chat-stream article.user {
+  justify-content: flex-end;
+}
+.chat-stream article > div {
+  max-width: 80%;
+}
+.chat-stream article b {
+  display: block;
+  margin-bottom: 5px;
+  color: #9a8479;
+  font-size: 8px;
+}
+.chat-stream article p {
+  margin: 0;
+  padding: 10px 12px;
+  border: 1px solid #362219;
+  border-radius: 3px 10px 10px 10px;
+  background: #17100e;
+  color: #cdbdb5;
+  font-size: 10px;
+  line-height: 1.6;
+}
+.chat-stream article.user p {
+  border-radius: 10px 10px 3px 10px;
+  background: #291a15;
+}
+.ai-avatar {
+  width: 34px;
+  height: 34px;
+  flex: none;
+  overflow: hidden;
+  border: 1px solid #4c2b1e;
+  border-radius: 9px;
+  background: #21130f;
+}
+.ai-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.chat-stream pre {
+  padding: 13px;
+  overflow: auto;
+  border: 1px solid #33231b;
+  border-radius: 8px;
+  background: #080504;
+  color: #e9b079;
+  font: 9px/1.65 "JetBrains Mono";
+}
+.wa-composer {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(720px, calc(100% - 40px));
+  padding: 10px;
+  border: 1px solid #563021;
+  border-radius: 11px;
+  background: #1a120ff5;
+  box-shadow: 0 15px 40px #000;
+}
+.wa-composer textarea {
+  width: 100%;
+  height: 50px;
+  resize: none;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: white;
+  font-size: 10px;
+}
+.wa-composer footer {
+  max-width: none;
+  padding: 4px 2px 0;
+  border: 0;
+  color: #79645b;
+  font-size: 8px;
+}
+.wa-composer footer span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.wa-composer footer svg {
+  width: 12px;
+}
+.wa-composer footer button {
+  margin-left: auto;
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 7px;
+  background: #e95122;
+  color: white;
+}
+.learn-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 11px;
+}
+.learn-toolbar span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #a89489;
+  font-size: 9px;
+}
+.learn-toolbar svg {
+  width: 14px;
+  color: #ff7135;
+}
+.learn-toolbar button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid #4b2b20;
+  border-radius: 7px;
+  background: #21130f;
+  color: #e6d6ce;
+  padding: 8px 10px;
+  font-size: 8px;
+}
+.learn-list {
+  display: grid;
+  gap: 10px;
+}
+.learn-list article {
+  display: grid;
+  grid-template-columns: 35px 1fr 60px;
+  gap: 12px;
+  padding: 18px;
+  border: 1px solid #382219;
+  border-radius: 11px;
+  background: #17100e;
+}
+.approve {
+  width: 29px;
+  height: 29px;
+  border: 1px solid #4b3025;
+  border-radius: 7px;
+  background: #110c0a;
+  color: #58483f;
+}
+.approve.on {
+  background: #173024;
+  color: #52d99a;
+  border-color: #29573f;
+}
+.approve svg {
+  width: 13px;
+}
+.learn-list input,
+.learn-list textarea,
+.learn-list select {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: white;
+}
+.learn-list input {
+  width: 100%;
+  font-size: 11px;
+  font-weight: 700;
+}
+.learn-list textarea {
+  display: block;
+  width: 100%;
+  height: 38px;
+  resize: none;
+  margin-top: 5px;
+  color: #907c72;
+  font: 9px/1.5 "DM Sans";
+}
+.learn-list label {
+  color: #6f5b52;
+  font-size: 8px;
+}
+.learn-list select {
+  margin-left: 5px;
+  padding: 4px;
+  border: 1px solid #3d271e;
+  border-radius: 5px;
+  background: #100b09;
+  color: #d4c2b8;
+  font-size: 8px;
+}
+.learn-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 3px;
+}
+.learn-actions button {
+  width: 27px;
+  height: 27px;
+  border: 0;
+  background: transparent;
+  color: #725f56;
+}
+.learn-actions button:last-child:hover {
+  color: #ff755e;
+}
+.learn-actions svg {
+  width: 13px;
+}
+@media (max-width: 1050px) {
+  .role-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 700px) {
+  .wa-shell {
+    display: block;
+  }
+  .wa-shell > aside {
+    position: fixed;
+    z-index: 20;
+    left: 0;
+    transform: translateX(-100%);
+    width: 235px;
+    transition: 0.25s;
+  }
+  .wa-shell > aside.open {
+    transform: none;
+    box-shadow: 20px 0 60px #000;
+  }
+  .wa-brand > button {
+    display: block;
+    margin-left: auto;
+    border: 0;
+    background: transparent;
+    color: #806c62;
+  }
+  .wa-menu {
+    display: grid;
+    position: fixed;
+    z-index: 10;
+    top: 13px;
+    left: 13px;
+    width: 40px;
+    height: 40px;
+    place-items: center;
+    border: 1px solid #3d281e;
+    border-radius: 8px;
+    background: #17100e;
+  }
+  .wa-page {
+    padding: 75px 16px 35px;
+  }
+  .wa-head {
+    margin-bottom: 30px;
+  }
+  .role-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .role-grid > button {
+    min-height: 300px;
+  }
+  .role-grid > button > div {
+    height: 170px;
+  }
+  .role-grid img {
+    height: 165px;
+  }
+  .pref-groups {
+    grid-template-columns: 1fr;
+  }
+  .workspace-page > header {
+    padding-left: 65px;
+  }
+  .connect-card {
+    margin: 18px 14px 0;
+  }
+  .chat-stream {
+    padding: 25px 15px 140px;
+  }
+  .learn-list article {
+    grid-template-columns: 32px 1fr;
+  }
+  .learn-actions {
+    grid-column: 2;
+  }
+  .wa-actions > button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+@media (max-width: 430px) {
+  .role-grid {
+    grid-template-columns: 1fr;
+  }
+  .role-grid > button {
+    min-height: 270px;
+  }
+  .role-grid > button > div {
+    height: 175px;
+  }
+  .role-grid p {
+    min-height: 0;
+  }
+}

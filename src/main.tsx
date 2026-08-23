@@ -19,8 +19,7 @@ import {
 import "./styles.css";
 import phoenix from "../assets/phoenix.png";
 import { AuthPage } from "./AuthPage";
-import { Panel } from "./Panel";
-import { ChoosePhoenix } from "./ChoosePhoenix";
+import { WorkspaceApp } from "./WorkspaceApp";
 import { auth } from "./firebase";
 
 const features = [
@@ -365,7 +364,6 @@ function LandingPage({ onAuth }: { onAuth: (mode: "login" | "signup") => void })
 function App() {
   const [user, setUser] = useState<User | null>(null);
   const [authMode, setAuthMode] = useState<"login" | "signup" | null>(null);
-  const [needsCharacter, setNeedsCharacter] = useState(false);
   const [checking, setChecking] = useState(true);
 
   useEffect(() => {
@@ -374,9 +372,8 @@ function App() {
   }, []);
 
   if (checking) return <div className="auth-loading"><span className="brand-mark"><Flame /></span><p>Loading your workspace…</p></div>;
-  if (user && needsCharacter) return <ChoosePhoenix onComplete={() => setNeedsCharacter(false)} />;
-  if (user) return <Panel user={user} />;
-  if (authMode) return <AuthPage initialMode={authMode} onBack={() => setAuthMode(null)} onRegistered={() => setNeedsCharacter(true)} />;
+  if (user) return <WorkspaceApp user={user} />;
+  if (authMode) return <AuthPage initialMode={authMode} onBack={() => setAuthMode(null)} />;
   return <LandingPage onAuth={setAuthMode} />;
 }
 createRoot(document.getElementById("root")!).render(

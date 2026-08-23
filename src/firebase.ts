@@ -1,5 +1,6 @@
 import { getApp, getApps, initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 import { getAnalytics, isSupported } from "firebase/analytics";
 
 const firebaseConfig = {
@@ -15,6 +16,7 @@ const firebaseConfig = {
 export const isFirebaseConfigured = Object.values(firebaseConfig).every(Boolean);
 const app = isFirebaseConfigured ? (getApps().length ? getApp() : initializeApp(firebaseConfig)) : null;
 export const auth = app ? getAuth(app) : null;
+export const db = app ? getFirestore(app) : null;
 
 if (app) {
   void isSupported().then((supported) => {
