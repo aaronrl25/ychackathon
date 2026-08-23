@@ -12,11 +12,11 @@
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",
-    "vite": "latest",
-    "typescript": "latest",
+    "lucide-react": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "lucide-react": "latest"
+    "typescript": "latest",
+    "vite": "latest"
   },
   "devDependencies": {
     "@types/express": "latest",
@@ -26,7 +26,8 @@
     "@types/ws": "latest",
     "dotenv": "latest",
     "express": "latest",
-    "mongodb": "latest",
+    "firebase-admin": "latest",
+    "prettier": "^3.9.6",
     "tsx": "latest",
     "ws": "latest"
   }
