@@ -3,13 +3,13 @@ import { getAuth } from "firebase/auth";
 import { getAnalytics, isSupported } from "firebase/analytics";
 
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID,
-  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
+  apiKey: "AIzaSyDWpoJNKz5bQgsd151gfSiJ2zvwi7t8qbI",
+  authDomain: "takeda-5ad2e.firebaseapp.com",
+  projectId: "takeda-5ad2e",
+  storageBucket: "takeda-5ad2e.appspot.com",
+  messagingSenderId: "561533153430",
+  appId: "1:561533153430:web:4213f051a3c0f4fb8f92b7",
+  measurementId: "G-ZZZ8PL37PW",
 };
 
 export const isFirebaseConfigured = Object.values(firebaseConfig).every(Boolean);
