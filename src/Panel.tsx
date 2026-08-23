@@ -24,6 +24,7 @@ import {
   UserRound,
 } from "lucide-react";
 import { auth } from "./firebase";
+import "./phoenix.css";
 import poseNeutral from "../assets/01_neutral-removebg-preview.png";
 import poseFocused from "../assets/03_focused-removebg-preview.png";
 import poseThinking from "../assets/06_thinking-removebg-preview.png";
@@ -32,9 +33,11 @@ import poseLearning from "../assets/08_learning-removebg-preview.png";
 import poseResting from "../assets/10_resting-removebg-preview.png";
 
 type Page =
-  "overview" | "memory" | "sessions" | "personalizer" | "chat" | "settings";
+  "overview" | "memory" | "sessions" | "phoenix" | "personalizer" | "chat" | "settings";
 type Icon = ComponentType<{ size?: number }>;
 type CustomMD = { name: string; tone: string; color: string; pose: number };
+type SoulMessage = { role: "user" | "assistant"; content: string };
+const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:8787";
 const preferences = [
   {
     name: "TypeScript first",
@@ -608,6 +611,29 @@ function ChatPage({ md, onEdit }: { md: CustomMD; onEdit: () => void }) {
   );
 }
 
+function PhoenixPage({ user }: { user: User }) {
+  const name = user.displayName || user.email?.split("@")[0] || "Builder";
+  const [messages, setMessages] = useState<SoulMessage[]>([{ role: "assistant", content: "I’m Phoenix, your Agent Architect. I’ll help you design an agent, then create its AGENTS.md. First: what project will this agent work on?" }]);
+  const [prompt, setPrompt] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const send = async (event: FormEvent) => {
+    event.preventDefault();
+    const content = prompt.trim();
+    if (!content || loading) return;
+    const next = [...messages, { role: "user" as const, content }];
+    setMessages(next); setPrompt(""); setLoading(true); setError("");
+    try {
+      const response = await fetch(`${apiUrl}/api/soul-chat`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ messages: next, developerId: user.uid }) });
+      const body = await response.json() as { message?: string; error?: string };
+      if (!response.ok) throw new Error(body.error || "Phoenix is unavailable.");
+      setMessages(current => [...current, { role: "assistant", content: body.message || "Please try again." }]);
+    } catch (cause) { setError(cause instanceof Error ? cause.message : "Phoenix is unavailable."); }
+    finally { setLoading(false); }
+  };
+  return <><Heading eyebrow="PHOENIX · AGENT ARCHITECT" title="Interview. Refine. Generate AGENTS.md." copy="Phoenix asks focused questions, turns your answers into an agent brief, and writes the final document when you confirm it is ready."/><section className="soul-chat panel-card"><div className="panel-card-head"><div><p>AGENT DESIGN SESSION</p><h2>Build an agent with a point of view.</h2></div><span className="soul-status"><i/> OpenAI connected</span></div><div className="soul-messages" aria-live="polite">{messages.map((message,index)=><article className={`soul-message ${message.role}`} key={`${message.role}-${index}`}><span>{message.role === "assistant" ? <Flame/> : name.slice(0,2).toUpperCase()}</span><p>{message.content}</p></article>)}{loading && <article className="soul-message assistant pending"><span><Flame/></span><p>Phoenix is shaping the next question…</p></article>}</div>{error && <p className="soul-error" role="alert">{error}</p>}<form className="soul-composer" onSubmit={send}><textarea value={prompt} onChange={event=>setPrompt(event.target.value)} placeholder="Answer Phoenix, or describe your project…" rows={3}/><footer><small>When you’re ready, ask Phoenix to generate AGENTS.md.</small><button disabled={loading || !prompt.trim()}>{loading ? "Thinking…" : <>Send to Phoenix <ArrowUp/></>}</button></footer></form></section></>;
+}
+
 function SettingsPage({ user }: { user: User }) {
   const [signals, setSignals] = useState(true);
   const [projects, setProjects] = useState(true);
@@ -729,6 +755,7 @@ export function Panel({ user }: { user: User }) {
     ["overview", "Overview", Sparkles],
     ["memory", "Memory", BrainCircuit],
     ["sessions", "Sessions", MessageSquareCode],
+    ["phoenix", "Phoenix", Flame],
     ["personalizer", "Personalizer", Palette],
     ...(customMD ? ([["chat", customMD.name, MessageSquareCode]] as [Page, string, Icon][]) : []),
     ["settings", "Settings", Settings],
@@ -770,6 +797,7 @@ export function Panel({ user }: { user: User }) {
         </div>
       </aside>
       <main className={`panel-main ${page === "chat" ? "chat-main" : ""}`}>
+        {page === "phoenix" && <PhoenixPage user={user} />}
         {page === "overview" && <Overview name={name} go={setPage} />}{" "}
         {page === "memory" && <MemoryPage />}{" "}
         {page === "sessions" && <SessionsPage />}{" "}
