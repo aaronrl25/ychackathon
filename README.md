@@ -1,8 +1,8 @@
-# Temper
+#  phoenix 
 
 > Stop teaching your AI the same things twice.
 
-Temper is a memory layer for AI coding tools. It learns the stack, architecture, naming conventions, testing habits, and communication style a developer approves, then applies that context in future sessions.
+ phoenix  is a memory layer for AI coding tools. It learns the stack, architecture, naming conventions, testing habits, and communication style a developer approves, then applies that context in future sessions.
 
 **Live demo:** [ychackathon.vercel.app](https://ychackathon.vercel.app)
 
@@ -10,13 +10,13 @@ Temper is a memory layer for AI coding tools. It learns the stack, architecture,
   <img src="docs/images/phoenix-excited.png" width="190" alt="An excited Temper Phoenix" />
 </p>
 
-![Choose a specialist Phoenix in Temper](docs/images/temper-phoenixes.png)
+![Choose a specialist Phoenix ](docs/images/temper-phoenixes.png)
 
 ## The problem
 
 Every new AI conversation starts from zero. Developers repeatedly explain the same project context and preferences, yesterday's decisions disappear, and generic output creates more correction and rework.
 
-Temper turns those corrections into a portable developer profile. Correct the AI once, approve what it should remember, and the preference is available the next time you build.
+ phoenix  turns those corrections into a portable developer profile. Correct the AI once, approve what it should remember, and the preference is available the next time you build.
 
 ## How it works
 
