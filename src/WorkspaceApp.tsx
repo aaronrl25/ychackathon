@@ -350,11 +350,14 @@ function Workspace({ user }: { user: User }) {
     setError("");
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:8787/api/phoenix-chat", {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL || (import.meta.env.DEV ? "http://localhost:8787" : "")}/api/phoenix-chat`,
+        {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ messages: nextMessages, role: role.id, repository: repo, preferences: preferenceValues }),
-      });
+        },
+      );
       const data = await response.json() as { message?: string; error?: string };
       if (!response.ok) throw new Error(data.error || "Phoenix could not answer.");
       setMessages((m) => [...m, { role: "ai", text: data.message || "I couldn’t produce a response." }]);

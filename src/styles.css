@@ -3694,3 +3694,31 @@ footer > span {
 .md-composer footer button { margin-left: auto; width: 31px; height: 31px; display: grid; place-items: center; border: 0; border-radius: 8px; background: var(--md-color); color: white; }
 .md-composer footer button svg { width: 14px; }
 @media (max-width: 760px) { .panel-main.chat-main { height: calc(100vh - 66px); } .md-composer { left: 50%; width: calc(100vw - 30px); bottom: 13px; } .md-chat-body { padding: 25px 16px 135px; } .chat-welcome { margin-bottom: 28px; } .md-chat > header { padding: 0 15px; } }
+
+/* Compact dashboard navigation and safe-area support on phones. */
+@media (max-width: 760px) {
+  .panel-sidebar {
+    min-width: 0;
+    padding-top: max(12px, env(safe-area-inset-top));
+  }
+  .panel-sidebar nav {
+    min-width: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .panel-sidebar nav::-webkit-scrollbar { display: none; }
+  .panel-sidebar nav button { min-width: 38px; }
+  .panel-brand,
+  .panel-user { flex: none; }
+  .panel-main { padding-bottom: max(30px, env(safe-area-inset-bottom)); }
+  .panel-main.chat-main { height: calc(100dvh - 66px); }
+  .md-composer { bottom: max(13px, env(safe-area-inset-bottom)); }
+}
+@media (max-width: 430px) {
+  .panel-sidebar { padding-left: 10px; padding-right: 10px; }
+  .panel-brand { font-size: 0; }
+  .panel-user > span { display: none; }
+  .panel-main { padding-left: 14px; padding-right: 14px; }
+  .panel-page-heading h1 { font-size: 29px; }
+  .panel-card { padding: 16px; }
+}

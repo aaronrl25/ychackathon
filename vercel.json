@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    { "source": "/choose", "destination": "/index.html" },
+    { "source": "/preferences", "destination": "/index.html" },
+    { "source": "/workspace", "destination": "/index.html" },
+    { "source": "/learned", "destination": "/index.html" }
+  ]
+}

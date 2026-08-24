@@ -37,7 +37,9 @@ type Page =
 type Icon = ComponentType<{ size?: number }>;
 type CustomMD = { name: string; tone: string; color: string; pose: number };
 type SoulMessage = { role: "user" | "assistant"; content: string };
-const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:8787";
+const apiUrl =
+  import.meta.env.VITE_API_URL ||
+  (import.meta.env.DEV ? "http://localhost:8787" : "");
 const preferences = [
   {
     name: "TypeScript first",
